@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+
+		<title>Plot - Chart</title>
+
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		
+		<!-- text area and line input -->
+		<link rel="stylesheet" href="css/jquery.numberedtextarea.css">
+
+		<style>
+			textarea {background:#000000; color:#ffffff; width: 100%;}
+		</style>
+	</head>
+ 
+	<body>
+	 	<div class="container">
+			<div class="row">
+				<div class="col-12">	
+					<nav class="navbar navbar-light" style="background-color: gray;">
+			  			<a class="navbar-brand" href="#"><%= name_autor %>'s Challenge</a>
+					</nav>
+				</div>
+			</div>
+			<div class="row">
+	    		<div class="col-12">
+	    			<div class="numberedtextarea-wrapper">
+	    				<textarea  cols="110" rows="15"></textarea>
+	    			</div>
+		    	</div>
+	    	</div>
+	    	<div class="col-2">
+	    		<button type="button" class="btn btn-default"><a href="plot-chart">Gerar Gráfico</a></button>
+	    	</div>
+	    </div>
+	<!-- JQuery -->
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<!--crossorigin="anonymous"-->
+	<script src="js/bootstrap.min.js" ></script>
+	<script src="js/jquery.numberedtextarea.js"></script>
+
+	<script type="text/javascript">
+		
+		$('textarea').numberedtextarea();
+	</script>
+	</body>
+</html>
