@@ -21,20 +21,26 @@
 			<div class="row">
 				<div class="col-12">	
 					<nav class="navbar navbar-light" style="background-color: gray;">
-			  			<a class="navbar-brand" href="#"><%= name_autor %>'s Challenge</a>
+			  			<label><%= name_autor %>'s Challenge</label>
 					</nav>
 				</div>
 			</div>
-			<div class="row">
-	    		<div class="col-12">
-	    			<div class="numberedtextarea-wrapper">
-	    				<textarea  cols="110" rows="15"></textarea>
-	    			</div>
+			<form action="/send" method="post">
+				<div class="row">
+		    		<div class="col-12">
+		    			<div class="numberedtextarea-wrapper">
+		    				<textarea id="txtArea" name="eventsJson" cols="110" rows="15" onkeypress="onTestChange();"></textarea>
+		    				<input type="hidden" id="contLines" name="contLines" />
+		    			</div>
+		    			
+			    	</div>
 		    	</div>
-	    	</div>
-	    	<div class="col-2">
-	    		<button type="button" class="btn btn-default"><a href="plot-chart">Gerar Gráfico</a></button>
-	    	</div>
+		    	<div class="col-2">
+		    		<button type="submit" class="btn btn-default">Gerar Gráfico</button>
+		    	</div>
+	    	</form>
+	    	
+
 	    </div>
 	<!-- JQuery -->
 	<script src="js/jquery-3.3.1.min.js"></script>
@@ -43,8 +49,21 @@
 	<script src="js/jquery.numberedtextarea.js"></script>
 
 	<script type="text/javascript">
-		
 		$('textarea').numberedtextarea();
+		//var d = $('numberedtextarea-number');
+		//alert(d.length);
+	</script>
+	<script>
+		function onTestChange() {
+		    var key = window.event.keyCode;
+		    var line = 0;
+		    // If the user has pressed enter
+		    if (key === 13) {
+		        line = document.getElementsByClassName("numberedtextarea-number").length + 1;
+		    	document.getElementById("contLines").value = line;
+		    }
+		    
+		}
 	</script>
 	</body>
 </html>
