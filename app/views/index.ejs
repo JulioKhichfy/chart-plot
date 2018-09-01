@@ -44,26 +44,11 @@
 	    </div>
 	<!-- JQuery -->
 	<script src="js/jquery-3.3.1.min.js"></script>
-	<!--crossorigin="anonymous"-->
 	<script src="js/bootstrap.min.js" ></script>
 	<script src="js/jquery.numberedtextarea.js"></script>
-
 	<script type="text/javascript">
 		$('textarea').numberedtextarea();
-		//var d = $('numberedtextarea-number');
-		//alert(d.length);
 	</script>
-	<script>
-		function onTestChange() {
-		    var key = window.event.keyCode;
-		    var line = 0;
-		    // If the user has pressed enter
-		    if (key === 13) {
-		        line = document.getElementsByClassName("numberedtextarea-number").length + 1;
-		    	document.getElementById("contLines").value = line;
-		    }
-		    
-		}
-	</script>
+	
 	</body>
 </html>
