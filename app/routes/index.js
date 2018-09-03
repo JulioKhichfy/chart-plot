@@ -1,9 +1,6 @@
  module.exports = function(application){
 
-
- 	console.log("passei na rota");
-
-	application.post('/send', function(req, res){
+	application.post('/', function(req, res){
 		application.app.controllers.index.getEvents(application, req, res);
 	});
 

@@ -25,12 +25,12 @@
 					</nav>
 				</div>
 			</div>
-			<form action="/send" method="post">
+			<form action="/" method="post">
 				<div class="row">
 		    		<div class="col-12">
 		    			<div class="numberedtextarea-wrapper">
 		    				<textarea id="txtArea" name="eventsJson" cols="110" rows="15" onkeypress="onTestChange();"></textarea>
-		    				<input type="hidden" id="contLines" name="contLines" />
+		    				
 		    			</div>
 		    			
 			    	</div>
@@ -39,8 +39,14 @@
 		    		<button type="submit" class="btn btn-default">Gerar Gráfico</button>
 		    	</div>
 	    	</form>
-	    	
-
+	    	<div>
+	    		<%= eventsJson %>
+	    	</div>
+	    	<div>
+	    		<%if(eventsJson != '') {%>
+				<canvas id="myChart" width="800px" height="500px"></canvas> 			
+				<%}%>
+			</div>
 	    </div>
 	<!-- JQuery -->
 	<script src="js/jquery-3.3.1.min.js"></script>
@@ -53,17 +59,7 @@
 		//var d = $('numberedtextarea-number');
 		//alert(d.length);
 	</script>
-	<script>
-		function onTestChange() {
-		    var key = window.event.keyCode;
-		    var line = 0;
-		    // If the user has pressed enter
-		    if (key === 13) {
-		        line = document.getElementsByClassName("numberedtextarea-number").length + 1;
-		    	document.getElementById("contLines").value = line;
-		    }
-		    
-		}
-	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+		<script src="js/graph.js"></script>
 	</body>
 </html>

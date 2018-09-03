@@ -1,14 +1,17 @@
 function EventModel(){
-	this._type='';
-	this._timestamp='';
+	var type='';
+	var timestamp='';
+	
 }
 
 EventModel.prototype.getEvent = function(callback){
 	
 }
 
-EventModel.prototype.getEvents = function(callback){
-
+EventModel.prototype.getEvents = function(events){
+	
+	
+    
 }
 
 
