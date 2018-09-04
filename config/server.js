@@ -17,8 +17,12 @@ app.set('view engine', 'ejs');
 app.set('views','./app/views');
 
 //middlewares
-app.use(express.static('./app/public'))
+app.use(express.static('./app/public'));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+
+// parse application/json
+//app.use(bodyParser.json())
 app.use(expressValidator());
 
 //faz o scan e inclui no servidor

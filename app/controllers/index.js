@@ -5,27 +5,26 @@ module.exports.home = function(app, req, res){
 
 module.exports.getEvents = function(app, req, res){
 	
-
-	var example = '{ "name":"John", "age":30, "city":"New York"}';
-	var test = JSON.parse(example);
-	console.log(">>>>example " + example);
-	console.log(">>>>test " + test.name);
-
 	var events = req.body.eventsJson;
-	//console.log("req body events: " + events);
+	console.log(">>>>> events: " + events);
 	
-	var dataStr = JSON.stringify(events, ['type']);
-	var objEvents = JSON.parse(dataStr);
-	console.log(">>>>> objEvents type: " + objEvents.type);  
+	json = JSON.stringify(events);
+	console.log("json typeof: " + typeof json);
+	console.log(">>>>> json: " + json);
+	console.log("json name: " + json.name);
 	
-	
-	
-	//console.log("stringify dataStr: " + dataStr);
-	//console.log("stringify dataStr type : " + dataStr.type);
+	data = JSON.parse(json);
+	console.log("data typeof: " + typeof data);
+	console.log("data: " + data);
+	console.log("data typeof: " + data.name);
 
-    //var obj = JSON.parse(dataStr);
-    //console.log("obj: " + obj);
-	//console.log("obj type: " + obj.type);    
+	/*teste hard c*/
+	eventStr = JSON.stringify({name:"julio"});
+	datateste = JSON.parse(eventStr);
+	console.log(">>>>> stringify eventStr typeof : " +typeof datateste);
+	console.log(">>>>> stringify eventStr : " + datateste);
+	console.log(">>>>> stringify eventStr name : " + datateste.name);
 	
-	res.render('index.ejs', {name_autor : 'Julio Cesar Khichfy', eventsJson : dataStr});
+	
+	res.render('index.ejs', {name_autor : 'Julio Cesar Khichfy', eventsJson : eventStr});
 }

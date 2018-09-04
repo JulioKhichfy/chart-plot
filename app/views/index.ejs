@@ -25,14 +25,12 @@
 					</nav>
 				</div>
 			</div>
-			<form action="/" method="post">
+			<form action="/" method="post" enctype="application/json">
 				<div class="row">
 		    		<div class="col-12">
 		    			<div class="numberedtextarea-wrapper">
-		    				<textarea id="txtArea" name="eventsJson" cols="110" rows="15" onkeypress="onTestChange();"></textarea>
-		    				
+		    				<textarea id="txtArea" name="eventsJson" cols="110" rows="15" ></textarea>
 		    			</div>
-		    			
 			    	</div>
 		    	</div>
 		    	<div class="col-2">
@@ -55,11 +53,20 @@
 	<script src="js/jquery.numberedtextarea.js"></script>
 
 	<script type="text/javascript">
-		$('textarea').numberedtextarea();
-		//var d = $('numberedtextarea-number');
-		//alert(d.length);
+		//$('textarea').numberedtextarea();
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-		<script src="js/graph.js"></script>
+	<script src="js/graph.js"></script>
+	<script>
+		/*function sendTextAreaValue()
+		{
+			$.ajax({
+			    url: '/', 
+			    type: 'POST', 
+			    contentType: 'application/json', 
+			    data: JSON.stringify({name:'laura'})}
+				)
+		}*/
+	</script>
 	</body>
 </html>
