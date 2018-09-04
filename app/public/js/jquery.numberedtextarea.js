@@ -103,6 +103,8 @@
             if(i === count) {
             	line.css('margin-bottom', paddingBottom + 'px');
             }
+            $( "#countLines" ).val(i);
+            
         }
     }
     

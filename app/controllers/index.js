@@ -5,6 +5,18 @@ module.exports.home = function(app, req, res) {
 
 module.exports.getEvents = function(app, req, res) {
 	var events = req.body.eventsJson;
-	var obj = eval("(" + events + ')');
+	var numlinhas = req.body.countLines;
+
+	var str = JSON.stringify(events).split(/\n/);
+
+	console.log(">>>>> str" + str);
+	
+	console.log(">>>>> numlinhas " + numlinhas);
+	console.log(">>>>> events" + events);
+		
+	var obj = eval("(" + str + ')');
+
+
+
 	res.render('index.ejs', {name_autor : 'Julio Cesar Khichfy', eventsJson : JSON.stringify(obj) });
 }

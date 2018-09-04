@@ -30,6 +30,7 @@
 		    		<div class="col-12">
 		    			<div class="numberedtextarea-wrapper">
 		    				<textarea id="txtArea" name="eventsJson" cols="110" rows="15" ></textarea>
+		    				<input type="hidden" name="countLines" id="countLines"></input>
 		    			</div>
 			    	</div>
 		    	</div>
@@ -53,20 +54,11 @@
 	<script src="js/jquery.numberedtextarea.js"></script>
 
 	<script type="text/javascript">
-		//$('textarea').numberedtextarea();
+		$('textarea').numberedtextarea();
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 	<script src="js/graph.js"></script>
-	<script>
-		/*function sendTextAreaValue()
-		{
-			$.ajax({
-			    url: '/', 
-			    type: 'POST', 
-			    contentType: 'application/json', 
-			    data: JSON.stringify({name:'laura'})}
-				)
-		}*/
-	</script>
+	
+	
 	</body>
 </html>
