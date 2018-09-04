@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 
 var expressValidator = require('express-validator');
 
-var chart = require('chart.js');
+//var chart = require('chart.js');
 
 //passar o consign como referencia para dentro de uma instancia do express
 //por isso é feito após a instancia do express
