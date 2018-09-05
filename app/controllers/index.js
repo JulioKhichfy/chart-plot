@@ -1,61 +1,59 @@
 // index.js
 
-module.exports.home = function(app, req, res) {
-	res.render('index.ejs',{
-		name_autor: 'Julio Cesar Khichfy',
-		graph_teste: '',
-		validacao: '' ,
-		valuesToTextArea: ''
-	});
+module.exports.home = function(app, req, res)
+{
+	res.render('index.ejs', {author: 'Julio Cesar Khichfy',
+		textarea: '', validation: ''});
 }
-
-module.exports.getEvents = function(app, req, res) {
-	//var payload = JSON.stringify(req.body.eventsJson);
-	var payload = req.body.eventsJson;
-	var numlinhas = parseInt(req.body.countLines);
-	
-	req.assert('eventsJson', 'Input de dados é obrigatório').notEmpty();
-    req.assert('eventsJson', 'Isso não me parece um input válido,' +
-    	' cada linha deve ter no minimo 3 caracteres').len(3);
-    
-    if(numlinhas<=3) {
-    	req.assert('countLines', 'Não é possível gerar gráfico com essas informações, ' +
-    		'no mínimo devemos ter Start, Span, Data e Stop').equals(3);
-    }
-    
-	var erros = req.validationErrors();
-	var lines = payload.split('\n');
-	//var lines = payload.substr(1, payload.length - 1).split("\n");
-	console.log(lines);
-
-	//var lines = payload.substring(1, payload.length - 1).split("\\r\\n");
-	var dataset = new Array;
-
-	lines.forEach(function (jsentry) {
-		if (jsentry != '')
-			dataset.push(eval('(' + jsentry + ')'));
-	});
-
+ 
+function map(lines)
+{
+	var dataset = [];
 	var typemap = new Map();
 
-	dataset.forEach(function (entry) {
-		if (typemap[entry.type])
-			typemap[entry.type].push(entry);
+	lines.forEach(function (e) {
+		if (e && e != '')
+			dataset.push(eval('(' + e + ')'));
+	});
+
+	dataset.forEach(function (e) {
+		if (typemap[e.type])
+			typemap[e.type].push(e);
 		else
-			typemap[entry.type] = [entry];
+			typemap[e.type] = [e];
 	});
 
 	for (key in typemap) {
 		typemap[key].sort(function (a, b) {
 			return a.timestamp > b.timestamp ? 1 :
 				a.timestamp < b.timestamp ? -1 : 0;
+	
 		});
 	}
 
-	if(erros)
-		res.render('index.ejs', {name_autor: 'Julio Cesar Khichfy', graph_teste: '',
-			valuesToTextArea: lines, validacao: erros});
+	return typemap;
+}
+
+module.exports.getEvents = function(app, req, res)
+{
+	var nlines = parseInt(req.body.countLines);
+
+	req.assert('eventsJson', 'Missing required fields').notEmpty();
+    req.assert('eventsJson', 'Lines too short').len(3);
+    
+    if(nlines <= 3)
+    	req.assert('countLines', 'Inconsistent dataset').equals(3);
+    
+    var errors = req.validationErrors();
+
+	var lines = req.body.eventsJson.split('\n');
+
+	if(errors)
+		return res.render('index.ejs', {author: 'Julio Cesar Khichfy',
+		textarea: lines, validation: errors});
+
+	var events = new app.app.models.EventModel(map(lines));
 	
-	res.render('index.ejs', {name_autor: 'Julio Cesar Khichfy', graph_teste: 'true',
-		validacao: erros, valuesToTextArea: lines});
+	res.render('index.ejs', {author: 'Julio Cesar Khichfy',
+		textarea: lines, validation: errors});
 }
