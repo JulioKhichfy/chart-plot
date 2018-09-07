@@ -37,6 +37,7 @@ function map(lines)
 module.exports.getEvents = function(app, req, res)
 {
 	var nlines = parseInt(req.body.countLines);
+	var lines = req.body.eventsJson.split('\n');
 
 	req.assert('eventsJson', 'Missing required fields').notEmpty();
     req.assert('eventsJson', 'Lines too short').len(3);
@@ -44,9 +45,47 @@ module.exports.getEvents = function(app, req, res)
     if(nlines <= 3)
     	req.assert('countLines', 'Inconsistent dataset').equals(3);
     
-    var errors = req.validationErrors();
+    req.assert('eventsJson', 'all blank lines ?').custom(function(lines){
+    	n = nlines;
+    	while(n > 0){
+    		if(!(/[\n|\n\r]/.test(lines[n]) || lines[n] == '')){
+    			return true;
+    		}
+    		n--;
+    	}
+    	return false;
+    });
 
-	var lines = req.body.eventsJson.split('\n');
+    req.assert('eventsJson', 'dont use blank line').custom(function(lines){
+    	n = nlines;
+    	while(n > 0){
+    		if(/[\n|\n\r]/.test(lines[n]) || lines[n] == ''){
+    			return false;
+    		}
+    		n--;
+    	}
+    	return true;
+    });
+
+    //TODO porque nao esta correto ? - retorna ':' 
+    req.assert('eventsJson', 'crazy input').custom(function(lines){
+
+    	try{
+    		n=nlines;
+    		while(n > 0){
+    			console.log(lines[n]);
+    	 		eval('(' + lines[n] + ')');
+    	 		n--;
+    	 	}
+    	 	return true;
+    	}catch(err){
+    		console.log(err);
+    		return false;
+    	}
+    });
+   
+
+    var errors = req.validationErrors();
 
 	if(errors)
 		return res.render('index.ejs', {author: 'Julio Cesar Khichfy',
